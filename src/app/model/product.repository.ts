@@ -1,5 +1,4 @@
 import { Injectable } from "@angular/core";
-import { pid } from "process";
 import { Product } from "./product.model";
 import { StaticDataSource } from "./static.datasource";
 

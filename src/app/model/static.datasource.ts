@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
-import {Product} from "./product.model";
-import { Observable } from "rxjs/observable";
-import "rxjs/add/observable/from";
+import { Product } from "./product.model";
+import { Observable } from "rxjs";
+import { from } from "rxjs";
 
 @Injectable()
 export class StaticDataSource {
@@ -24,6 +24,6 @@ export class StaticDataSource {
     ];
 
     getProducts(): Observable<Product[]> {
-        return Observable.from([this.products]);
+        return from([this.products]);
     }
 }
