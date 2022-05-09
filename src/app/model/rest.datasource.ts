@@ -16,31 +16,26 @@ export class RestDataSource {
         this.baseUrl = `${PROTOCOL}://${location.hostname}:${PORT}/`;
     }
 
-    getProducts(): Observable<object> | undefined {
-        var request = this.sendRequest("GET", "products");
-        if (request)
-            return request;
-        else
-            return undefined;
+    getProducts(): Observable<Product[] | Order> {
+        return this.sendRequest("GET", "products");
     }
 
-    saveOrder(order: Order): Observable<object> | undefined {
-        var request = this.sendRequest("POST", "orders");
-        if (request)
-            return request;
-        else
-            return undefined;
+    saveOrder(order: Order): Observable<Product[] | Order> {
+        return this.sendRequest("POST", "orders");
     }
 
-    private sendRequest(method: string, url: string, body?: Product | Order): Observable<Object> | undefined {
+    private sendRequest(method: string, url: string, body?: Product | Order): Observable<Product[] | Order> {
         var request;
         switch (method.toUpperCase()) {
             case "GET":
-                request = this.http.get(this.baseUrl + url).pipe();
+                request = this.http.get<Product[] | Order>(this.baseUrl + url);
                 break;
             case "POST":
-                request = this.http.post(this.baseUrl + url, body).pipe();
+                request = this.http.post<Product[] | Order>(this.baseUrl + url, body);
                 break;
+            default:
+                request = this.http.get<Product[] | Order>(this.baseUrl + url);
+
         }
 
         return request;
