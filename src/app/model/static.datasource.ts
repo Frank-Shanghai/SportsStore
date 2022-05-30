@@ -28,8 +28,8 @@ export class StaticDataSource {
         return from([this.products]);
     }
 
-    saveOrder(order: Order) {
-        console.log(JSON.stringify(order));
-        return from([order]);
-    }
+    // saveOrder(order: Order) {
+    //     console.log(JSON.stringify(order));
+    //     return from([order]);
+    // }
 }
